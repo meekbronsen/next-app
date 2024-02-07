@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import Time from '../components/Time';
 import UserTable from "./UserTable";
 
 
-const UsersPage = async () => {
+interface Props{
+  searchParams: {sortOrder: string}
+}
 
+const UsersPage = async ({searchParams: {sortOrder}}: Props) => {
+  
+  
   return (
     <>
-      <h1>Users</h1>
-      <Time/>
-      <UserTable/>
+      <div className="flex">
+        <h1 className="text-3xl font-bold ">Users</h1>
+      </div>
+      <UserTable sortOrder={sortOrder} />
     </>
   );
 };
