@@ -12,7 +12,7 @@ const UsersPage = async ({searchParams: {sortOrder}}: Props) => {
   return (
     <>
       <div className="flex">
-        <h1 className="text-3xl font-bold ">Users</h1>
+        <h1 className="  ">Users</h1>
       </div>
       <UserTable sortOrder={sortOrder} />
     </>
