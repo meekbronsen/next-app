@@ -13,7 +13,7 @@ interface Props {
 
 // Sorting the users from the server using , name or email query string parameters
 const UserTable = async ({ sortOrder }: Props) => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/xusers", {});
+  const res = await fetch("https://jsonplaceholder.typicode.com/users", {});
   const users: User[] = await res.json();
 
   const sortedUsers = sort(users).asc(
