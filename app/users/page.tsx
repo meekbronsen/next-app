@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import UserTable from "./UserTable";
+import Link from "next/link";
 
 
 interface Props{
@@ -8,13 +9,15 @@ interface Props{
 
 const UsersPage = async ({searchParams: {sortOrder}}: Props) => {
   
-  
   return (
     <>
-      <div className="flex">
+      <div className="flex justify-between">
         <h1 className="  ">Users</h1>
+        <Link href={'/users/new'} className="btn btn-outline text-xs text-black ">NEW USER</Link>
       </div>
-      <UserTable sortOrder={sortOrder} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <UserTable sortOrder={sortOrder} />
+      </Suspense>
     </>
   );
 };
