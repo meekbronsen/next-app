@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import schema from "../schema";
+
 
 interface Props {
   params: { id: number };
@@ -14,10 +16,15 @@ export function GET(request: NextRequest, { params }: Props) {
 export async function PUT(request: NextRequest, { params: { id } }: Props) {
   const body = await request.json();
 
-  // Validate the request body
-  if (!body.name)
-    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  //schema.parse -- this one throws an error incase of invalid body
+  // but safeParse doesn't yell, it returns an object with the errors.
+  const validation = schema.safeParse(body)
 
+
+  if (!validation.success)
+    return NextResponse.json({ error: validation.error.errors }, { status: 400 });
+
+    
   if (id > 10)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
 

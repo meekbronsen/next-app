@@ -38,7 +38,7 @@ const UserTable = async ({ sortOrder }: Props) => {
       <tbody>
         {sortedUsers.map((user, index) => (
           <tr key={index}>
-            <td>{index}</td>
+            <td>{++index}</td>
             <td>{user.name}</td>
             <td>{user.email}</td>
           </tr>
