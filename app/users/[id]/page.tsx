@@ -7,6 +7,7 @@ interface Props {
 
 const useDetailPage = ({ params: { id } }: Props) => {
   if (id > 10) notFound();
+  
   return <div>useDetailPage {id}</div>;
 };
 
