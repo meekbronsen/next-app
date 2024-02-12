@@ -1,17 +1,13 @@
 import React from "react";
 import { NextRequest, NextResponse } from "next/server";
 import schema from "./schema";
+import prisma from "@/prisma/client";
 
-// This will cache the response. next time we hit this endpoint we are gonna see cached data.
-// export function GET() {
+export async function GET(request: NextRequest) {
+  // using the created prisma object instance to fetch data from the database
+  const users = await prisma.user.findMany()
 
-// To prevent caching we add the request object
-export function GET(request: NextRequest) {
-  //Next js is gonna cache this response
-  return NextResponse.json([
-    { id: 1, name: "Michael" },
-    { id: 2, name: "Mosh" },
-  ]);
+  return NextResponse.json(users);
 }
 
 export async function POST(request: NextRequest) {
