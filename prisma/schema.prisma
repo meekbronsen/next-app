@@ -9,3 +9,15 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+// Defining a model
+
+model User {
+  // document id Field
+  // @id -- says that this field uniquely identifies each user
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  name      String
+  followers Int     @default(0)
+  isActive  Boolean @default(true)
+}
