@@ -6,14 +6,12 @@ import prisma from "@/prisma/client";
 import { NextAuthOptions } from "next-auth";
 import bcrypt from 'bcrypt'
 
-// Implementing log In
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        // label what the forminput will be labled
         email: { label: "Email", type: "enter your email" },
         password: {
           label: "Password",
@@ -22,7 +20,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
 
-      // This function is used for validation of what the user has submitted.
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials.password) return null;
 
@@ -30,7 +27,6 @@ export const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
-        // If user is not registered
         if (!user) return null;
 
         const isAMatch = await bcrypt.compare( credentials.password, user.hashedPassword! )
